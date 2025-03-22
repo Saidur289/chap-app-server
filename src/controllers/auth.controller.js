@@ -1,3 +1,4 @@
+import { generateToken } from "../lib/utilis.js";
 import User from "../models/user.model.js";
 import bcrypt from 'bcryptjs'
 export const signup = async(req, res) =>{
@@ -18,10 +19,20 @@ export const signup = async(req, res) =>{
     })
     if(newUser) {
         // generate token
+        generateToken(newUser._id, res)
+        res.status(201).json({
+          _id: newUser._id,
+          email: newUser.fullName,
+          profilePic: newUser.profilePic  
+        })
+    }
+    else{
+        res.status(400).json({message: 'Invalid user data'})
+        res.status(500).json({message: 'Internal server error'})
     }
    }
    catch(error){
-    console.log(error);
+    console.log(error, 'error in the singup controller');
    }
 }
 export const login = (req, res) => {
