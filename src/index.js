@@ -5,6 +5,7 @@ dotenv.config()
 import authRoutes from './route/auth.route.js' 
 const app = express()
 const PORT = process.env.PORT
+app.use(express.json())
 app.use('/api/auth', authRoutes)
 app.get('/', (req, res) => {
     res.send('Hello World!')
