@@ -80,9 +80,11 @@ export const logout = (req, res) => {
         
     }
 }
+// function for update profile picture
 export const updateProfile = async(req, res) => {
     try {
         const {profilePic} = req.body
+        console.log(profilePic);
         const userId= req.user._id 
         if(!profilePic){
             return res.status(400).json({message: 'profile pic is required'})
@@ -94,6 +96,7 @@ export const updateProfile = async(req, res) => {
         console.log('Update profile error', error);
     }
 }
+// function for check user is available
 export const checkAuth = (req, res) => {
     try {
         console.log(req.user);

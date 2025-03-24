@@ -38,7 +38,7 @@ export const sendMessage = async(req, res) => {
         const {id: receiverId} = req.params
         console.log('receiverId', receiverId);
         const senderId = req.user?._id 
-        console.log(senderId);
+       
         let imageURL ;
         if(image){
             // upload base64 image to cloudinary
@@ -54,6 +54,7 @@ export const sendMessage = async(req, res) => {
             text,
             image:imageURL
         })
+        console.log(newMessage);
         await newMessage.save()
         // todo: realtime functionality goes here by socket io
     } catch (error) {
